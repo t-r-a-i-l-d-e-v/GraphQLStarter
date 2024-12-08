@@ -1,0 +1,36 @@
+<template>
+    <lightning-layout>
+
+        <!-- Search Results -->
+        <lightning-layout-item size="8">
+            <lightning-card title="GraphQL Demo">
+                <div class="slds-var-p-around_medium">
+        
+                    <!-- Search Bar -->
+                    <c-gql-demo-search-bar onsearchkeychange={handleSearchKeyChange} onrefresh={refresh}></c-gql-demo-search-bar>
+        
+                    <!-- Error Message -->
+                    <template lwc:if={errorMsg}>
+                        <p class="error">{errorMsg}</p>
+                    </template>
+        
+                    <!-- Search Results -->
+                    <template lwc:if={tabs}>
+                        <c-gql-demo-table-tabset
+                            tabs={tabs} 
+                            page-size={pageSize} 
+                            max-row-selection="1"
+                            onrowselection={handleRowSelection}
+                        ></c-gql-demo-table-tabset>
+                    </template>
+                </div>
+            </lightning-card>
+        </lightning-layout-item>
+
+        <!-- Record Details -->
+        <lightning-layout-item size="4" class="slds-var-p-left_small">
+            <c-gql-child-details gql-record={selectedRow}></c-gql-child-details>
+        </lightning-layout-item>
+
+    </lightning-layout>
+</template>
